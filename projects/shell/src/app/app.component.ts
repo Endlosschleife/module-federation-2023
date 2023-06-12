@@ -1,4 +1,8 @@
+import { getManifest } from '@angular-architects/module-federation';
 import { Component } from '@angular/core';
+import { CustomManifest, CustomRemoteConfig } from './utilities/remoteConfig';
+import { Router } from '@angular/router';
+import { buildRoutes } from './utilities/routes';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +11,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shell';
+
+  remotes: CustomRemoteConfig[] = [];
+  constructor(private router: Router) {}
+  async ngOnInit(): Promise<void> {
+    const manifest = getManifest<CustomManifest>();
+    const routes = buildRoutes(manifest);
+    this.router.resetConfig(routes);
+    this.remotes = Object.values(manifest);
+  }
 }
