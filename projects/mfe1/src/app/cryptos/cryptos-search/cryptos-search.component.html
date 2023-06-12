@@ -1,12 +1,12 @@
 <style>
   .example-card {
-  max-width: 400px;
-}
+    max-width: 400px;
+  }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
 </style>
 
 <p>
@@ -32,10 +32,12 @@
     <p>
       Ready to take your investments <em>to the moon?</em> Look no further than this coin guaranteed to increase in value by 10,000% by the end of the week.
     </p>
+    <p>
+      Available Balance: {{ balance | currency }}
+    </p>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="purchase()" mat-button>Purchase</button>
+    <button *ngIf='balance' (click)="purchase()" mat-button>Purchase</button>
     <button (click)="reset()" mat-button>Watch</button>
   </mat-card-actions>
 </mat-card>
-
